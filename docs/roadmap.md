@@ -1,6 +1,6 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Roadmap BaseTemplate -->
+<!-- Parent: Tasks -->
+<!-- Title: Roadmap Tasks -->
 <!-- Label: Roadmap -->
 <!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
@@ -29,7 +29,7 @@
 
 The Roadmap is a list of all the things we're working on for the year.
 
-You can see the corresponding projects on [base-template](https://github.com/hadenlabs/base-template)
+You can see the corresponding projects on [tasks](https://github.com/InfosisARG/tasks)
 
 ## Legend
 
@@ -39,15 +39,5 @@ You can see the corresponding projects on [base-template](https://github.com/had
 - :feedback: : actively looking for feedback
 
 ## Epics
-
-### Agosto 2021
-
-### September 2021
-
-### October 2021
-
-### November 2021
-
-### December 2021
 
 ## Long Lived Initiatives

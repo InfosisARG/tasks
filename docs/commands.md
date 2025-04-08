@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Commands BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: Tasks -->
+<!-- Title: Commands Tasks -->
+<!-- Label: Tasks -->
 <!-- Label: Project -->
 <!-- Label: Commands -->
 <!-- Include: disclaimer.md -->
@@ -205,12 +205,4 @@ task version:minor
 
 ```{.bash}
 task version:patch
-```
-
-### Multipass
-
-#### Launch minikube
-
-```bash
-task multipass:launch:minikube
 ```

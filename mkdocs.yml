@@ -1,4 +1,4 @@
-site_name: base-template Documentation
+site_name: tasks Documentation
 theme: "material"
 markdown_extensions:
   - toc:
@@ -15,9 +15,9 @@ extra:
   font:
     text: "Source Sans Pro"
 
-repo_name: "hadenlabs/base-template"
-repo_url: "https://github.com/hadenlabs/base-template"
-copyright: 'Copyright © 2021 <a href="https://hadenlabs.com">hadenlabs</a>'
+repo_name: "InfosisARG/tasks"
+repo_url: "https://github.com/InfosisARG/tasks"
+copyright: 'Copyright © 2021 <a href="https://infosisglobal.com">infosisglobal</a>'
 
 google_analytics:
   - ""

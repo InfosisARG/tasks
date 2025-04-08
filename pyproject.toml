@@ -2,7 +2,7 @@
 name = "tasks"
 version = "0.0.0"
 description = "tasks"
-authors = ["Luis Mayta <luis@hadenlabs.com>"]
+authors = ["Luis Mayta <lmayta@infosis.tech>"]
 license = "LGPL-3.0"
 readme = "README.md"
 repository = "https://github.com/InfosisARG/tasks"

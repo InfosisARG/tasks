@@ -45,6 +45,12 @@ badges:
 
 requirements: |-
 
+  This is a list of var environment requireds:
+
+    - `GITLAB_USER`: This is the GitLab USER.
+    - `GITLAB_TOKEN`: This is the GitLab personal access token.
+    - `TASK_X_REMOTE_TASKFILES=1`: Enabled Tasks Remote
+
   This is a list of plugins that need to be installed previously to enjoy all the goodies of this configuration:
 
   - [gomplate](https://github.com/hairyhenderson/gomplate)
@@ -54,7 +60,11 @@ requirements: |-
 # Short description of this project
 description: |-
 
-  tasks for project
+  # 📦 Taskfile Templates Repository
+
+  This repository contains reusable **Taskfile templates** to standardize and
+  simplify common tasks like running pre-commit hooks, generating changelogs,
+  creating GitHub releases, and more.
 
 usages:
   - docs/usage.md

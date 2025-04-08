@@ -47,40 +47,41 @@ version: "3"
 
 includes:
   pre-commit:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/pre-commit/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/pre-commit/Taskfile.yml"
   github:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/github/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/github/Taskfile.yml"
   changelog:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/changelog/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/changelog/Taskfile.yml"
   confluence:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/confluence/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/confluence/Taskfile.yml"
   node:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/node/Taskfile.yml"
-  python: taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/python/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/node/Taskfile.yml"
+  python:
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/python/Taskfile.yml"
   git:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/git/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/git/Taskfile.yml"
   docs:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/docs/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/docs/Taskfile.yml"
   docker:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/docker/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/docker/Taskfile.yml"
   version:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/version/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/version/Taskfile.yml"
   plantuml:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/plantuml/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/plantuml/Taskfile.yml"
   prettier:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/prettier/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/prettier/Taskfile.yml"
   sonar:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/sonar/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/sonar/Taskfile.yml"
   keybase:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/keybase/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/keybase/Taskfile.yml"
   multipass:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/multipass/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/multipass/Taskfile.yml"
   ssh:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/ssh/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/ssh/Taskfile.yml"
   openssl:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/openssl/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/openssl/Taskfile.yml"
   diagrams:
-    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/diagrams/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/diagrams/Taskfile.yml"
 
 env:
   DOCKER:
@@ -162,6 +163,7 @@ tasks:
       - >-
         gomplate --file {{.README_TEMPLATE}} --out {{.README_FILE}} --datasource config={{.README_YAML}} --datasource includes={{.README_INCLUDES}}
 
+
       - task: prettier
 
   prettier:
@@ -182,6 +184,7 @@ tasks:
     cmds:
       - >-
         [ -e ".env" ] || cp -rf .env.example .env
+
 
       - task: python:setup
       - task: python:precommit

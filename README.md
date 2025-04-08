@@ -30,12 +30,6 @@ This is a list of plugins that need to be installed previously to enjoy all the 
 
 # How to use this project
 
-## Replace name project to New Project
-
-```bash
-agr 'tasks' 'new-project'
-```
-
 ## Examples
 
 <!-- Space: Projects -->

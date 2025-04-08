@@ -16,9 +16,17 @@
 
 # tasks
 
-tasks for project
+# 📦 Taskfile Templates Repository
+
+This repository contains reusable **Taskfile templates** to standardize and simplify common tasks like running pre-commit hooks, generating changelogs, creating GitHub releases, and more.
 
 ## Requirements
+
+This is a list of var environment requireds:
+
+- `GITLAB_USER`: This is the GitLab USER.
+- `GITLAB_TOKEN`: This is the GitLab personal access token.
+- `TASK_X_REMOTE_TASKFILES=1`: Enabled Tasks Remote
 
 This is a list of plugins that need to be installed previously to enjoy all the goodies of this configuration:
 
@@ -28,7 +36,162 @@ This is a list of plugins that need to be installed previously to enjoy all the 
 
 ## Usage
 
-# How to use this project
+# 🚀 How to use this project
+
+## Add the Remote Taskfiles
+
+To use the Taskfile templates in your project, include the remote Taskfiles in your project's `Taskfile.yaml`:
+
+```yaml
+version: "3"
+
+includes:
+  pre-commit:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/pre-commit/Taskfile.yml"
+  github:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/github/Taskfile.yml"
+  changelog:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/changelog/Taskfile.yml"
+  confluence:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/confluence/Taskfile.yml"
+  node:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/node/Taskfile.yml"
+  python: taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/python/Taskfile.yml"
+  git:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/git/Taskfile.yml"
+  docs:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/docs/Taskfile.yml"
+  docker:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/docker/Taskfile.yml"
+  version:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/version/Taskfile.yml"
+  plantuml:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/plantuml/Taskfile.yml"
+  prettier:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/prettier/Taskfile.yml"
+  sonar:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/sonar/Taskfile.yml"
+  keybase:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/keybase/Taskfile.yml"
+  multipass:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/multipass/Taskfile.yml"
+  ssh:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/ssh/Taskfile.yml"
+  openssl:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/openssl/Taskfile.yml"
+  diagrams:
+    taskfile: "https://{{.GITLAB_USER}}:{{.GITLAB_TOKEN}}@gitlab.infosisglobal.com/architecture/tasks/-/raw/main/src/diagrams/Taskfile.yml"
+
+env:
+  DOCKER:
+    sh: docker --version 2> /dev/null || echo "not exist"
+  PYTHON:
+    sh: python --version 2> /dev/null || echo "not exist"
+  GO:
+    sh: go version 2> /dev/null || echo "not exist"
+  NODE:
+    sh: node --version 2> /dev/null || echo "not exist"
+  APP_TAG:
+    sh: git describe --tags $(git rev-list --tags --max-count=1) 2> /dev/null || echo "0.0.0"
+  README_YAML: provision/generators/README.yaml
+  README_TEMPLATE: provision/templates/README.tpl.md
+  README_INCLUDES: file://
+
+vars:
+  PROJECT_NAME: { { project } }
+  GROUP_NAME: { { group_name } }
+  ORGANIZATION: { { organization } }
+  DOCKER_PLATFORM: linux/amd64
+  REVIEWERS: luismayta
+  PYTHON_VERSION: 3.11.5
+  NODE_VERSION: 18.18.2
+  TERRAFORM_VERSION: 1.8.4
+  GIT_IGNORES: python,node,go,zsh,sonar,java,maven,intellij+all,terraform,linux
+  GOLANGCI_VERSION: 1.42.0
+  README_FILE: README.md
+  GIT_IGNORES_CUSTOM: |
+    bin
+    .scannerwork
+    .secrets
+    public
+    TMP_CHANGELOG.md
+    .task
+    .terraform.lock.hcl
+    *.lock.hcl
+    *.zip
+    .external_modules
+    vendor
+
+dotenv:
+  - .env
+
+tasks:
+  default:
+    deps:
+      - task: check
+    cmds:
+      - cmd: echo Application {{.PROJECT_NAME}}
+        silent: true
+      - task: version:default
+      - task: summary
+      - cmd: task -l
+    silent: true
+
+  summary:
+    desc: "Summary information"
+    cmds:
+      - echo Go available {{.GO}}
+      - echo Python available {{.PYTHON}}
+      - echo Docker available {{.DOCKER}}
+      - echo Node available {{.NODE}}
+    silent: true
+
+  check:
+    desc: "Check all dependencies"
+    deps:
+      - python:check
+      - changelog:check
+      - git:check
+      - docs:check
+
+  readme:
+    run: once
+    desc: Generate Readme
+    silent: true
+    cmds:
+      - >-
+        gomplate --file {{.README_TEMPLATE}} --out {{.README_FILE}} --datasource config={{.README_YAML}} --datasource includes={{.README_INCLUDES}}
+
+      - task: prettier
+
+  prettier:
+    run: once
+    desc: Execute prettier files
+    cmds:
+      - task: prettier:all
+
+  upgrade:
+    run: once
+    desc: Execute upgrade packages
+    cmds:
+      - poetry update
+      - poetry run pre-commit autoupdate
+
+  setup:
+    desc: Setup dependences of project
+    cmds:
+      - >-
+        [ -e ".env" ] || cp -rf .env.example .env
+
+      - task: python:setup
+      - task: python:precommit
+      - task: git:setup
+
+  environment:
+    desc: Setup environment of project
+    cmds:
+      - task: python:environment
+```
 
 ## Examples
 
@@ -74,7 +237,7 @@ Using the given version number of `MAJOR.MINOR.PATCH`, we apply the following co
 
 ## Copyright
 
-Copyright © 2018-2025 [Hadenlabs](https://hadenlabs.com)
+Copyright © 2018-2025 [Infosis Global](https://infosisglobal.com)
 
 ## Trademarks
 

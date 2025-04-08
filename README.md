@@ -47,41 +47,41 @@ version: "3"
 
 includes:
   pre-commit:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/pre-commit/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/pre-commit/Taskfile.yml"
   github:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/github/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/github/Taskfile.yml"
   changelog:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/changelog/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/changelog/Taskfile.yml"
   confluence:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/confluence/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/confluence/Taskfile.yml"
   node:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/node/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/node/Taskfile.yml"
   python:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/python/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/python/Taskfile.yml"
   git:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/git/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/git/Taskfile.yml"
   docs:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/docs/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/docs/Taskfile.yml"
   docker:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/docker/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/docker/Taskfile.yml"
   version:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/version/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/version/Taskfile.yml"
   plantuml:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/plantuml/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/plantuml/Taskfile.yml"
   prettier:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/prettier/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/prettier/Taskfile.yml"
   sonar:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/sonar/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/sonar/Taskfile.yml"
   keybase:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/keybase/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/keybase/Taskfile.yml"
   multipass:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/multipass/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/multipass/Taskfile.yml"
   ssh:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/ssh/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/ssh/Taskfile.yml"
   openssl:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/openssl/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/openssl/Taskfile.yml"
   diagrams:
-    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/main/src/diagrams/Taskfile.yml"
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/diagrams/Taskfile.yml"
 
 env:
   DOCKER:

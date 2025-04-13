@@ -58,6 +58,10 @@ includes:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/node/Taskfile.yml"
   python:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/python/Taskfile.yml"
+  yarn:
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/yarn/Taskfile.yml"
+  pnpm:
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/pnpm/Taskfile.yml"
   git:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/git/Taskfile.yml"
   docs:

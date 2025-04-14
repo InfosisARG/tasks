@@ -28,7 +28,7 @@ env:
   README_YAML: provision/generators/README.yaml
   README_TEMPLATE: provision/templates/README.tpl.md
   README_INCLUDES: file://
-  TERRAFORM_DIR: provision/terraform
+  TERRAFORM_PATH: provision/terraform
 
 dotenv:
   - .env

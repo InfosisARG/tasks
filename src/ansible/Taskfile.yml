@@ -216,8 +216,6 @@ tasks:
       - task: playbook
         vars:
           STAGE: sandbox
-          PLAYBOOK: deploy
-          INVENTORY: sandbox
 
   playbook:dev:
     desc: execute playbook stage dev
@@ -228,8 +226,6 @@ tasks:
       - task: playbook
         vars:
           STAGE: dev
-          PLAYBOOK: deploy
-          INVENTORY: all
 
   playbook:staging:
     desc: execute playbook stage staging
@@ -240,8 +236,6 @@ tasks:
       - task: playbook
         vars:
           STAGE: staging
-          PLAYBOOK: deploy
-          INVENTORY: all
 
   playbook:prod:
     desc: execute playbook stage prod
@@ -252,5 +246,3 @@ tasks:
       - task: playbook
         vars:
           STAGE: prod
-          PLAYBOOK: deploy
-          INVENTORY: all

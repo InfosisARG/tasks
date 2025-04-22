@@ -1,0 +1,48 @@
+---
+version: "3"
+
+tasks:
+  check:
+    desc: Exist molecule and dependences
+    run: once
+    deps:
+      - task: check:molecule
+
+  check:molecule:
+    desc: Exist module molecule
+    run: once
+    preconditions:
+      - sh: test "poetry run command -v molecule"
+        msg: "Please Install molecule"
+
+  test:
+    desc: run test molecule.
+    run: once
+    cmds:
+      - poetry run molecule test --scenario-name={{.SCENARIO}} --destroy=always
+    deps:
+      - task: check
+
+  test:all:
+    desc: run test molecule.
+    run: once
+    cmds:
+      - poetry run molecule test --all --destroy=always
+    deps:
+      - task: check
+
+  scenario:
+    desc: create scenario molecule.
+    run: once
+    cmds:
+      - poetry run molecule init scenario {{.SCENARIO}} --driver-name=ec2 --provisioner-name=ansible --role-name=ansible-role-postgresql
+    deps:
+      - task: check
+
+  scenario:test:
+    desc: run test molecule with scenario.
+    run: once
+    cmds:
+      - task: test
+    deps:
+      - task: check

@@ -4,7 +4,7 @@ version: "3"
 includes:
   changelog: ./src/changelog/Taskfile.yml
   confluence: ./src/confluence/Taskfile.yml
-  python: ./src/python/Taskfile.yml
+  uv: ./src/uv/Taskfile.yml
   git: ./src/git/Taskfile.yml
   docs: ./src/docs/Taskfile.yml
   docker: ./src/docker/Taskfile.yml
@@ -85,7 +85,7 @@ tasks:
   check:
     desc: "Check all dependencies"
     deps:
-      - python:check
+      - uv:check
       - changelog:check
       - git:check
       - docs:check
@@ -109,16 +109,16 @@ tasks:
   upgrade:
     desc: Execute upgrade packages
     cmds:
-      - poetry update
-      - poetry run pre-commit autoupdate
+      - uv update
+      - uv run pre-commit autoupdate
 
   setup:
     desc: Setup dependences of project
     cmds:
       - >-
         [ -e ".env" ] || cp -rf .env.example .env
-      - task: python:setup
-      - task: python:precommit
+      - task: uv:setup
+      - task: uv:precommit
       - task: git:setup
 
   test:
@@ -130,4 +130,4 @@ tasks:
   environment:
     desc: Setup environment of project
     cmds:
-      - task: python:environment
+      - task: uv:environment

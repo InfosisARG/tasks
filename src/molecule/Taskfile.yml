@@ -12,14 +12,14 @@ tasks:
     desc: Exist module molecule
     run: once
     preconditions:
-      - sh: test "poetry run command -v molecule"
+      - sh: test "{{ .PYTHON_PACKAGE_MANAGER }} run command -v molecule"
         msg: "Please Install molecule"
 
   test:
     desc: run test molecule.
     run: once
     cmds:
-      - poetry run molecule test --scenario-name={{.SCENARIO}} --destroy=always
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run molecule test --scenario-name={{.SCENARIO}} --destroy=always"
     deps:
       - task: check
 
@@ -27,7 +27,7 @@ tasks:
     desc: run test molecule.
     run: once
     cmds:
-      - poetry run molecule test --all --destroy=always
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run molecule test --all --destroy=always"
     deps:
       - task: check
 
@@ -35,7 +35,7 @@ tasks:
     desc: create scenario molecule.
     run: once
     cmds:
-      - poetry run molecule init scenario {{.SCENARIO}} --driver-name=ec2 --provisioner-name=ansible --role-name=ansible-role-postgresql
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run molecule init scenario {{.SCENARIO}} --driver-name=ec2 --provisioner-name=ansible --role-name={{ .PROJECT_NAME }}"
     deps:
       - task: check
 

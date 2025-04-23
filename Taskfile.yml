@@ -5,6 +5,7 @@ includes:
   changelog: ./src/changelog/Taskfile.yml
   confluence: ./src/confluence/Taskfile.yml
   uv: ./src/uv/Taskfile.yml
+  python: ./src/python/Taskfile.yml
   git: ./src/git/Taskfile.yml
   docs: ./src/docs/Taskfile.yml
   docker: ./src/docker/Taskfile.yml
@@ -25,6 +26,7 @@ env:
     sh: node --version 2> /dev/null || echo "not exist"
   APP_TAG:
     sh: git describe --tags $(git rev-list --tags --max-count=1) 2> /dev/null || echo "0.0.0"
+  PYTHON_PACKAGE_MANAGER: uv
   README_YAML: provision/generators/README.yaml
   README_TEMPLATE: provision/templates/README.tpl.md
   README_INCLUDES: file://

@@ -176,9 +176,9 @@ tasks:
       - task: check
     cmds:
       - >
-         {{ .PYTHON_PACKAGE_MANAGER }} run ansible-vault {{.ANSIBLE_COMMAND}}
-          {{.ANSIBLE_PATH}}/{{.STAGE}}/inventory/all.yml
-          --vault-password-file "{{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}"/vault.txt
+        {{ .PYTHON_PACKAGE_MANAGER }} run ansible-vault {{.ANSIBLE_COMMAND}}
+         {{.ANSIBLE_PATH}}/{{.STAGE}}/inventory/all.yml
+         --vault-password-file "{{.KEYBASE_PROJECT_PATH}}/{{.STAGE}}"/vault.txt
 
   management:
     desc: execute playbook ansible management

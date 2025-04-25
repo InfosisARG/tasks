@@ -107,11 +107,21 @@ tasks:
           ANSIBLE_COMMAND: decrypt
           FILE_SECRET: vars/all.yml
 
+  collection:
+    desc: install or update collection
+    deps:
+      - task: check
+    cmds:
+      - >
+        {{ .PYTHON_PACKAGE_MANAGER }} run ansible-galaxy
+        collection install {{ .ANSIBLE_COLLECTIONS }}
+
   update:
     desc: install or update roles
     run: once
     deps:
       - task: check
+      - task: collection
     cmds:
       - >
         {{ .PYTHON_PACKAGE_MANAGER }} run ansible-galaxy

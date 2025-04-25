@@ -47,6 +47,8 @@ vars:
   GOLANGCI_VERSION: 1.42.0
   TERRAFORM_VERSION: 1.10.5
   README_FILE: README.md
+  ANSIBLE_COLLECTIONS: |
+    community.sops
   GIT_IGNORES_CUSTOM: |
     bin
     .scannerwork

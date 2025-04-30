@@ -24,3 +24,9 @@ tasks:
     run: once
     cmds:
       - "{{ .PYTHON_PACKAGE_MANAGER }} run bump-my-version bump patch --no-commit"
+
+  pre_release:
+    desc: "Increase pre_release version"
+    run: once
+    cmds:
+      - "{{ .PYTHON_PACKAGE_MANAGER }} run bump-my-version bump pre_release --no-commit"

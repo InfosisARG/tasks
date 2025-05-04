@@ -13,6 +13,7 @@ includes:
   plantuml: ./src/plantuml/Taskfile.yml
   prettier: ./src/prettier/Taskfile.yml
   sonar: ./src/sonar/Taskfile.yml
+  terraform: ./src/terraform/Taskfile.yml
   diagrams: ./provision/diagrams/Taskfile.yml
 
 env:
@@ -109,6 +110,7 @@ tasks:
     desc: Execute prettier files
     cmds:
       - task: prettier:all
+      - task: terraform:fmt
 
   upgrade:
     desc: Execute upgrade packages

@@ -54,7 +54,7 @@ tasks:
       - task: check:uv
 
   fmt:
-    desc: format black ruff
+    desc: format ruff
     run: once
     cmds:
       - cmd: >-

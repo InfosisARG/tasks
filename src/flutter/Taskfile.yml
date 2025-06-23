@@ -1,0 +1,33 @@
+---
+version: "3"
+
+tasks:
+  check:
+    desc: Exist flutter and dependences
+    run: once
+    deps:
+      - task: check:flutter
+      - task: check:dart
+
+  check:flutter:
+    desc: Exist flutter
+    run: once
+    preconditions:
+      - sh: command -v flutter
+        msg: "Please Install flutter"
+
+  check:dart:
+    desc: Exist dart
+    run: once
+    preconditions:
+      - sh: command -v dart
+        msg: "Please Install dart"
+
+  setup:
+    desc: Setup flutter dependences.
+    run: once
+    cmds:
+      - flutter pub get
+    deps:
+      - task: check:flutter
+      - task: check:dart

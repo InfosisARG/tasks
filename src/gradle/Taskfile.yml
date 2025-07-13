@@ -53,6 +53,13 @@ tasks:
     deps:
       - task: check:gradle
 
+  test:allure:
+    desc: Test gradle run allureServe
+    cmds:
+      - gradle clean test allureServe
+    deps:
+      - task: check:gradle
+
   run:
     desc: Run gradle.
     run: once

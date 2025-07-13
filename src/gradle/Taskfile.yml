@@ -49,7 +49,7 @@ tasks:
   test:
     desc: Test gradle packages.
     cmds:
-      - gradle test
+      - gradle clean test
     deps:
       - task: check:gradle
 

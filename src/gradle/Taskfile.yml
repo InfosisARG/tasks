@@ -1,5 +1,8 @@
 version: "3"
 
+vars:
+  GRADLE_VERSION: 8.14
+
 tasks:
   check:
     desc: Exist gradle and dependences
@@ -75,3 +78,14 @@ tasks:
       - ./gradlew publish
     deps:
       - task: check:gradle
+
+  environment:
+    desc: Generate environment Gradle
+    run: once
+    cmds:
+      - mkdir -p gradle/wrapper
+      - curl -o gradlew https://raw.githubusercontent.com/gradle/gradle/master/gradle/wrapper/gradlew
+      - curl -o gradlew.bat https://raw.githubusercontent.com/gradle/gradle/master/gradle/wrapper/gradlew.bat
+      - curl -o gradle/wrapper/gradle-wrapper.jar https://services.gradle.org/distributions/gradle-wrapper.jar
+      - curl -o gradle/wrapper/gradle-wrapper.properties https://raw.githubusercontent.com/gradle/gradle/v{{ .GRADLE_VERSION }}/gradle/wrapper/gradle-wrapper.properties
+      - chmod +x gradlew

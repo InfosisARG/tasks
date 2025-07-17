@@ -38,7 +38,6 @@ tasks:
       - cmd: >-
           terragrunt hcl format
 
-
   setup:
     desc: install setup
     run: once

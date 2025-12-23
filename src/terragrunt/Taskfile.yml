@@ -150,6 +150,16 @@ tasks:
         vars:
           TERRAGRUNT_COMMAND: apply
 
+  unlock:
+    desc: force unlock terragrunt
+    run: once
+    deps:
+      - task: check
+    cmds:
+      - cmd: terragrunt force-unlock --working-dir {{.TERRAFORM_PATH}}/{{.REGION}}/{{.STAGE}} {{.LOCK_ID}}
+        vars:
+          REGION: us-east-1
+
   refresh:
     desc: make terragrunt refresh
     run: once

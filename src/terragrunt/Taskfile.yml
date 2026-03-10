@@ -64,7 +64,7 @@ tasks:
     deps:
       - task: check
     cmds:
-      - cmd: terragrunt import {{.COMMAND}} --working-dir {{.TERRAFORM_PATH}}/{{.REGION}}/{{.STAGE}} --source-update
+      - cmd: terragrunt import {{.COMMAND}} --working-dir {{.TERRAFORM_PATH}}/{{.REGION}}/{{.STAGE}}
         vars:
           REGION: us-east-1
 

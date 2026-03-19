@@ -45,7 +45,7 @@ badges:
 
 requirements: |-
 
-  This is a list of var environment requireds:
+  This is a list of var environment requires:
 
     - `GITLAB_USER`: This is the GitLab USER.
     - `GITLAB_TOKEN`: This is the GitLab personal access token.

@@ -8,6 +8,8 @@ To use the Taskfile templates in your project, include the remote Taskfiles in y
 version: "3"
 
 includes:
+  bun:
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/bun/Taskfile.yml"
   pre-commit:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/pre-commit/Taskfile.yml"
   github:
@@ -40,6 +42,8 @@ includes:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/prettier/Taskfile.yml"
   sonar:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/sonar/Taskfile.yml"
+  uv:
+    taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/uv/Taskfile.yml"
   keybase:
     taskfile: "https://raw.githubusercontent.com/InfosisARG/tasks/refs/heads/main/src/keybase/Taskfile.yml"
   multipass:
@@ -122,6 +126,7 @@ tasks:
       - changelog:check
       - git:check
       - docs:check
+      - bun:check
 
   readme:
     run: once
@@ -144,8 +149,8 @@ tasks:
     run: once
     desc: Execute upgrade packages
     cmds:
-      - poetry update
-      - poetry run pre-commit autoupdate
+      - uv update
+      - uv run pre-commit autoupdate
 
   setup:
     desc: Setup dependences of project
@@ -154,12 +159,13 @@ tasks:
         [ -e ".env" ] || cp -rf .env.example .env
 
 
-      - task: python:setup
-      - task: python:precommit
+      - task: uv:setup
+      - task: uv:precommit
       - task: git:setup
+      - task: bun:setup
 
   environment:
     desc: Setup environment of project
     cmds:
-      - task: python:environment
+      - task: uv:environment
 ```

@@ -1,3 +1,6 @@
+
+
+
 <!--
 
 
@@ -12,27 +15,48 @@
 
   -->
 
-[![Latest Release](https://img.shields.io/github/release/InfosisARG/tasks)](https://github.com/InfosisARG/tasks/releases) [![Lint](https://img.shields.io/github/workflow/status/InfosisARG/tasks/lint-code)](https://github.com/InfosisARG/tasks/actions?workflow=lint-code) [![CI](https://img.shields.io/github/workflow/status/InfosisARG/tasks/ci)](https://github.com/InfosisARG/tasks/actions?workflow=ci) [![Test](https://img.shields.io/github/workflow/status/InfosisARG/tasks/test)](https://github.com/InfosisARG/tasks/actions?workflow=test) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.0.0-orange)](https://keepachangelog.com)
+
+ [![Latest Release](https://img.shields.io/github/release/InfosisARG/tasks)](https://github.com/InfosisARG/tasks/releases) [![Lint](https://img.shields.io/github/workflow/status/InfosisARG/tasks/lint-code)](https://github.com/InfosisARG/tasks/actions?workflow=lint-code) [![CI](https://img.shields.io/github/workflow/status/InfosisARG/tasks/ci)](https://github.com/InfosisARG/tasks/actions?workflow=ci) [![Test](https://img.shields.io/github/workflow/status/InfosisARG/tasks/test)](https://github.com/InfosisARG/tasks/actions?workflow=test) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.0.0-orange)](https://keepachangelog.com)
 
 # tasks
 
+
+
+
 # 📦 Taskfile Templates Repository
 
-This repository contains reusable **Taskfile templates** to standardize and simplify common tasks like running pre-commit hooks, generating changelogs, creating GitHub releases, and more.
+This repository contains reusable **Taskfile templates** to standardize and
+simplify common tasks like running pre-commit hooks, generating changelogs,
+creating GitHub releases, and more. 
+
+
+
+
+
+
+
+
+
+
 
 ## Requirements
 
+
 This is a list of var environment requires:
 
-- `GITLAB_USER`: This is the GitLab USER.
-- `GITLAB_TOKEN`: This is the GitLab personal access token.
-- `TASK_X_REMOTE_TASKFILES=1`: Enabled Tasks Remote
+  - `GITLAB_USER`: This is the GitLab USER.
+  - `GITLAB_TOKEN`: This is the GitLab personal access token.
+  - `TASK_X_REMOTE_TASKFILES=1`: Enabled Tasks Remote
 
 This is a list of plugins that need to be installed previously to enjoy all the goodies of this configuration:
 
 - [gomplate](https://github.com/hairyhenderson/gomplate)
 - [python](https://www.python.org)
 - [taskfile](https://github.com/go-task/task)
+
+
+
+
 
 ## Usage
 
@@ -208,6 +232,12 @@ tasks:
       - task: uv:environment
 ```
 
+
+
+
+
+
+
 ## Examples
 
 <!-- Space: Projects -->
@@ -225,11 +255,20 @@ tasks:
 task setup
 ```
 
+
+
+
+
+
+
+
+
 ## Help
 
 **Got a question?**
 
 File a GitHub [issue](https://github.com/InfosisARG/tasks/issues).
+
 
 ## Contributing
 
@@ -247,21 +286,36 @@ Using the given version number of `MAJOR.MINOR.PATCH`, we apply the following co
 
 ### Backwards compatibility in `0.0.z` and `0.y.z` version
 
-- In the context of initial development, backwards compatibility in versions `0.0.z` is **not guaranteed** when `z` is increased. (Initial development)
-- In the context of pre-release, backwards compatibility in versions `0.y.z` is **not guaranteed** when `y` is increased. (Pre-release)
+- In the context of initial development, backwards compatibility in versions `0.0.z` is **not guaranteed** when `z` is
+  increased. (Initial development)
+- In the context of pre-release, backwards compatibility in versions `0.y.z` is **not guaranteed** when `y` is
+  increased. (Pre-release)
+
+
+
 
 ## Copyright
 
 Copyright © 2018-2026 [Infosis Global](https://infosisglobal.com)
 
+
+
 ## Trademarks
 
 All other trademarks referenced herein are the property of their respective owners.
+
+
+
+
+
 
 ## License
 
 The code and styles are licensed under the LGPL-3.0 license [See project license.](LICENSE).
 
+
+
 ## Don't forget to 🌟 Star 🌟 the repo if you like tasks
+
 
 [Your feedback is appreciated](https://github.com/InfosisARG/tasks/issues)

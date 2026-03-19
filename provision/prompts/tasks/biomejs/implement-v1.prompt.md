@@ -1,148 +1,166 @@
-# Prompt: Generar Taskfile Template
+# Prompt: Implementar Taskfile para BiomeJS
 
-**Objetivo**: Crear `src/<nombre>/Taskfile.yml` para: **{{TOOL_NAME}}**
+## Objetivo
 
-Sigue las reglas de `AGENTS.md` estrictamente.
+Crear `src/biomejs/Taskfile.yml` para la herramienta **BiomeJS**.
+
+BiomeJS es un formatter y linter rapido para JavaScript/TypeScript que reemplaza Prettier y ESLint.
 
 ---
 
-## Estructura Base
+## Contexto
+
+Ver convenciones en: `@.opencode/context/project/task-templates.md`
+
+---
+
+## Comandos de BiomeJS
+
+```bash
+# Formatear archivos
+biome fmt .
+
+# Lintear archivos
+biome lint .
+
+# Verificar (fmt + lint + otras validaciones)
+biome check .
+
+# Aplicar fixes automaticamente
+biome check --write .
+
+# Migrar desde prettier/eslint
+biome migrate prettier
+biome migrate eslint
+```
+
+### Patrones de archivos
+
+```bash
+biome fmt "**/*.js" "**/*.ts" "**/*.jsx" "**/*.tsx" "**/*.json"
+biome lint "**/*.js" "**/*.ts" "**/*.jsx" "**/*.tsx"
+```
+
+---
+
+## Estructura del Taskfile
 
 ```yaml
 version: "3"
 
 tasks:
   check:
-    desc: Exist {{TOOL_NAME}} and dependences
+    desc: Exist biomejs and dependences
     run: once
     deps:
-      - task: check:{{TOOL_NAME_LOWER}}
+      - task: check:biomejs
 
-  check:{{TOOL_NAME_LOWER}}:
-    desc: Exist {{TOOL_NAME}}
+  check:biomejs:
+    desc: Exist BiomeJS
     run: once
     preconditions:
-      - sh: command -v {{TOOL_COMMAND}}
-        msg: "Please Install {{TOOL_NAME}}"
+      - sh: command -v biome
+        msg: "Please Install biome"
 
   setup:
-    desc: Setup {{TOOL_NAME}} dependences.
+    desc: Setup biomejs configuration.
     run: once
     cmds:
-      - { { SETUP_COMMAND } }
+      - biome init
     deps:
-      - task: check
+      - task: check:biomejs
 
   fmt:
-    desc: Format files {{TOOL_NAME}}.
+    desc: Format files with BiomeJS.
     run: once
     cmds:
-      - { { FMT_COMMAND } }
+      - bunx @biomejs/biome format . --write
     deps:
-      - task: check
+      - task: check:biomejs
 
   lint:
-    desc: Run linter {{TOOL_NAME}}.
+    desc: Lint files with BiomeJS.
     run: once
     cmds:
-      - { { LINT_COMMAND } }
+      - bunx @biomejs/biome lint .
     deps:
-      - task: check
+      - task: check:biomejs
 
-  test:
-    desc: Run tests {{TOOL_NAME}}.
+  check:
+    desc: Check files with BiomeJS (fmt + lint).
     run: once
     cmds:
-      - { { TEST_COMMAND } }
+      - bunx @biomejs/biome check --write .
     deps:
-      - task: check
-```
+      - task: check:biomejs
 
----
-
-## Convenciones (AGENTS.md)
-
-| Regla            | Detalle            |
-| ---------------- | ------------------ |
-| `version: "3"`   | Siempre v3         |
-| `desc:`          | Obligatorio        |
-| `run: once`      | Idempotente        |
-| `deps:`          | Precondiciones     |
-| `preconditions:` | Verificar binaries |
-| 2 spaces         | Indent YAML        |
-| `\|\| true`      | Solo intencional   |
-
-### Nomenclatura
-
-- **Namespace**: `area:accion` → `python:fmt`, `docker:build`
-- **Common verbs**: `check`, `setup`, `fmt`, `lint`, `test`, `build`, `publish`
-
----
-
-## Patrones Comunes
-
-### Check Pattern
-
-```yaml
-check:
-  deps:
-    - task: check:tool
-
-check:tool:
-  preconditions:
-    - sh: command -v tool
-      msg: "Please Install tool"
-```
-
-### Variable Propagation
-
-```yaml
-tasks:
-  build:
+  fix:
+    desc: Fix lint violations automatically.
+    run: once
     cmds:
-      - docker build --tag {{.CI_REGISTRY}}/{{.PROJECT_NAME}}:{{.APP_TAG}}
-```
+      - bunx @biomejs/biome lint . --write --max-diagnostics=none --unsafe
+    deps:
+      - task: check:biomejs
 
-### Deps Dependencies
-
-```yaml
-build:
-  deps:
-    - task: login
-    - task: check
-```
-
----
-
-## Variables Disponibles
-
-```yaml
-PROJECT_NAME, ORGANIZATION, APP_TAG, DOCKER_PLATFORM PYTHON_VERSION, NODE_VERSION, TERRAFORM_VERSION
+  migrate:
+    desc: Migrate from prettier/eslint configs.
+    run: once
+    cmds:
+      - biome migrate prettier
+      - biome migrate eslint
+    deps:
+      - task: check:biomejs
 ```
 
 ---
 
-## Tareas por Categoria
+## Configuracion (biome.json)
 
-| Categoria  | Tareas Tipicas                       |
-| ---------- | ------------------------------------ |
-| Runtime    | check, setup, fmt, lint, test, build |
-| IaC        | check, fmt, validate, docs           |
-| Containers | check, login, build, publish         |
-| Docs       | check, build, serve                  |
-| Release    | check, version, changelog            |
+```json
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "ignore": ["node_modules/**", "dist/**", "build/**", "*.min.js"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 90
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "always"
+    }
+  }
+}
+```
 
 ---
 
 ## Salida
 
-1. `src/{{TOOL_SLUG}}/Taskfile.yml`
-2. Descripcion breve de tareas
-3. Variables requeridas (si hay)
+1. `src/biomejs/Taskfile.yml`
+2. `biome.json` (configuracion)
+3. Breve descripcion de tareas
 
 ## Validacion
 
 ```bash
-task prettier
-task -l src/{{TOOL_SLUG}}/Taskfile.yml
+task biome
+task -l src/biomejs/Taskfile.yml
 ```

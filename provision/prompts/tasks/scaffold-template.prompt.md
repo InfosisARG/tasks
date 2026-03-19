@@ -1,4 +1,4 @@
-# Prompt: Agregar nueva Taskfile template a tasks
+# Prompt: Agregar nueva Taskfile template
 
 ## Objetivo
 
@@ -8,35 +8,27 @@ Crear `src/{{task_slug}}/Taskfile.yml` integrado con la arquitectura del reposit
 
 ---
 
-## Reglas Obligatorias (AGENTS.md)
+## Contexto
 
-| Regla            | Detalle                         |
-| ---------------- | ------------------------------- |
-| `version: "3"`   | Siempre v3                      |
-| `desc:`          | Obligatorio en todas las tareas |
-| `run: once`      | Para tareas idempotentes        |
-| `deps:`          | Encadenar precondiciones        |
-| `preconditions:` | Verificar binaries/env vars     |
-| 2 spaces         | Indent en YAML                  |
-| `\|\| true`      | Solo si es intencional          |
-
-### Nomenclatura
-
-```yaml
-tasks:
-  namespace:verb: # area:accion
-  check: # Verificar precondiciones
-  setup: # Instalar dependencias
-  fmt: # Formatear codigo
-  lint: # Ejecutar linter
-  test: # Ejecutar tests
-  build: # Compilar/Build
-  publish: # Publicar artefactos
-```
+Ver convenciones en: `@.opencode/context/project/task-templates.md`
 
 ---
 
-## Estructura Requerida
+## Placeholders
+
+| Placeholder         | Uso                         |
+| ------------------- | --------------------------- |
+| `{{task_name}}`     | Nombre legible: "Terraform" |
+| `{{task_slug}}`     | Slug: "terraform"           |
+| `{{tool_command}}`  | Comando: "terraform"        |
+| `{{setup_command}}` | Comando de setup            |
+| `{{fmt_command}}`   | Comando de format           |
+| `{{lint_command}}`  | Comando de lint             |
+| `{{test_command}}`  | Comando de test             |
+
+---
+
+## Estructura Base
 
 ```yaml
 version: "3"
@@ -46,9 +38,9 @@ tasks:
     desc: Exist {{task_name}} and dependences
     run: once
     deps:
-      - task: check:{{task_name_slug}}
+      - task: check:{{task_slug}}
 
-  check:{{task_name_slug}}:
+  check:{{task_slug}}:
     desc: Exist {{task_name}}
     run: once
     preconditions:
@@ -87,61 +79,6 @@ tasks:
     deps:
       - task: check
 ```
-
----
-
-## Patrones Comunes
-
-### Check Pattern
-
-```yaml
-check:
-  deps:
-    - task: check:tool
-    - task: check:dependencies
-
-check:tool:
-  preconditions:
-    - sh: command -v tool
-      msg: "Please Install tool"
-```
-
-### Deps Dependencies
-
-```yaml
-build:
-  deps:
-    - task: login
-    - task: check
-```
-
-### Variable Propagation
-
-```yaml
-build:
-  cmds:
-    - docker build --tag {{.CI_REGISTRY}}/{{.PROJECT_NAME}}:{{.APP_TAG}}
-```
-
----
-
-## Variables Disponibles
-
-```yaml
-PROJECT_NAME, ORGANIZATION, APP_TAG, DOCKER_PLATFORM USER, REVIEWERS PYTHON_VERSION, NODE_VERSION, TERRAFORM_VERSION, GOLANGCI_VERSION
-```
-
----
-
-## Tareas por Categoria
-
-| Categoria                | Tareas Tipicas                       |
-| ------------------------ | ------------------------------------ |
-| Runtime (go, python)     | check, setup, fmt, lint, test, build |
-| IaC (terraform, ansible) | check, fmt, validate, docs           |
-| Containers (docker)      | check, login, build, publish         |
-| Docs (mkdocs)            | check, build, serve                  |
-| Release                  | check, version, changelog            |
 
 ---
 

@@ -13,6 +13,7 @@ includes:
   release: ./src/release/Taskfile.yml
   plantuml: ./src/plantuml/Taskfile.yml
   prettier: ./src/prettier/Taskfile.yml
+  biome: ./src/biomejs/Taskfile.yml
   sonar: ./src/sonar/Taskfile.yml
   terraform: ./src/terraform/Taskfile.yml
   bun: ./src/bun/Taskfile.yml
@@ -122,12 +123,12 @@ tasks:
         --out {{.README_FILE}}
         --datasource config={{.README_YAML}}
         --datasource includes={{.README_INCLUDES}}
-      - task: prettier
+      - task: format
 
-  prettier:
-    desc: Execute prettier files
+  format:
+    desc: Execute format files
     cmds:
-      - task: prettier:all
+      - task: biome:fmt
       - task: terraform:fmt
 
   upgrade:
@@ -144,12 +145,12 @@ tasks:
       - task: uv:setup
       - task: uv:precommit
       - task: git:setup
-      - task: bun:setup
 
   environment:
     desc: Setup environment of project
     cmds:
       - task: uv:environment
+      - task: bun:setup
 
   validate:
     desc: "Run validate on all files"

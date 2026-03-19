@@ -40,6 +40,7 @@ Organizes reusable Taskfile templates by tool/language ecosystem. These template
 | Category   | Path              | Description                                  |
 | ---------- | ----------------- | -------------------------------------------- |
 | Prettier   | `src/prettier/`   | Multi-language code formatting               |
+| Biome      | `src/biomejs/`    | Fast JS/TS formatter and linter (Prettier+ESLint replacement) |
 | Pre-commit | `src/pre-commit/` | Git hooks management                         |
 | Docs       | `src/docs/`       | MkDocs documentation build/serve             |
 | SonarQube  | `src/sonar/`      | SonarQube scanning via Docker                |

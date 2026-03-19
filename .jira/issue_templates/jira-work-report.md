@@ -1,6 +1,6 @@
 ## Cambios Implementados
 
-Describe brevemente el resultado final de esta tarea y los cambios principales que fueron entregados.  
+Describe brevemente el resultado final de esta tarea y los cambios principales que fueron entregados.
 Si esta implementación corrige un bug o implementa una funcionalidad solicitada, enlaza el issue o requerimiento correspondiente.
 
 ## Tipo de Cambio

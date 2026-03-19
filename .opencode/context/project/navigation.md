@@ -7,3 +7,4 @@ Repo-specific conventions for this repository:
 - `skills-architecture.md`
 - `documentation-rules.md`
 - `jira-gitlab-workflow.md`
+- `task-templates.md`

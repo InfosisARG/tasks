@@ -28,7 +28,7 @@ version: "3"
 
 tasks:
   check:
-    desc: Exist Opencode and dependences
+    desc: Exist opencode and dependencies
     run: once
     deps:
       - task: check:opencode

@@ -15,6 +15,7 @@ includes:
   prettier: ./src/prettier/Taskfile.yml
   sonar: ./src/sonar/Taskfile.yml
   terraform: ./src/terraform/Taskfile.yml
+  bun: ./src/bun/Taskfile.yml
   diagrams: ./provision/diagrams/Taskfile.yml
 
 env:
@@ -95,6 +96,22 @@ tasks:
       - changelog:check
       - git:check
       - docs:check
+      - check:bun
+      - check:curl
+
+  check:bun:
+    desc: Exist bun
+    run: once
+    preconditions:
+      - sh: command -v bun
+        msg: "Please Install bun"
+
+  check:curl:
+    desc: Exist curl
+    run: once
+    preconditions:
+      - sh: command -v curl
+        msg: "Please Install curl"
 
   readme:
     desc: Generate Readme
@@ -127,6 +144,7 @@ tasks:
       - task: uv:setup
       - task: uv:precommit
       - task: git:setup
+      - task: bun:setup
 
   environment:
     desc: Setup environment of project

@@ -1,0 +1,244 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-gemini-auth@latest",
+    "opencode-openai-codex-auth@latest",
+    "opencode-antigravity-auth@latest",
+    "opencode-dynamic-context-pruning@latest",
+    "opencode-websearch-cited@latest",
+    "opencode-type-inject@latest",
+    "tokenscope-opencode-plugin@latest",
+    "opencode-ignore@latest"
+  ],
+  "model": "opencode/big-pickle",
+  "small_model": "opencode/big-pickle",
+  "instructions": ["AGENTS.md"],
+  "agent": {
+    "OpenAgent": {
+      "mode": "primary"
+    },
+    "OpenCoder": {
+      "mode": "primary"
+    },
+    "OpenSystemBuilder": {
+      "mode": "primary"
+    },
+    "OpenRepoManager": {
+      "mode": "primary",
+      "permission": {
+        "bash": {
+          "*": "ask",
+          "glab *": "allow",
+          "task validate": "allow",
+          "task validate *": "allow",
+          "git add *": "allow",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git rev-parse*": "allow",
+          "git checkout*": "allow",
+          "git push *": "allow",
+          "rm -rf *": "ask",
+          "rm -rf /*": "deny",
+          "sudo *": "deny",
+          "> /dev/*": "deny"
+        }
+      }
+    },
+    "OpenTechnicalWriter": {
+      "mode": "primary",
+      "permission": {
+        "bash": {
+          "*": "ask",
+          "task readme": "allow",
+          "task readme *": "allow",
+          "task validate": "allow",
+          "task validate *": "allow",
+          "sudo *": "deny"
+        }
+      }
+    },
+    "OpenCopywriter": {
+      "mode": "primary"
+    },
+    "OpenDataAnalyst": {
+      "mode": "primary"
+    },
+    "CodeReviewer": {
+      "mode": "subagent"
+    },
+    "BuildAgent": {
+      "mode": "subagent"
+    },
+    "CoderAgent": {
+      "mode": "subagent"
+    },
+    "TestEngineer": {
+      "mode": "subagent"
+    },
+    "ContractManager": {
+      "mode": "subagent"
+    },
+    "StoryMapper": {
+      "mode": "subagent"
+    },
+    "ADRManager": {
+      "mode": "subagent"
+    },
+    "ArchitectureAnalyzer": {
+      "mode": "subagent"
+    },
+    "PrioritizationEngine": {
+      "mode": "subagent"
+    },
+    "OpenFrontendSpecialist": {
+      "mode": "subagent"
+    },
+    "OpenDevopsSpecialist": {
+      "mode": "subagent"
+    },
+    "ContextScout": {
+      "mode": "subagent"
+    },
+    "ExternalScout": {
+      "mode": "subagent"
+    },
+    "DocWriter": {
+      "mode": "subagent"
+    },
+    "ContextManager": {
+      "mode": "subagent"
+    },
+    "BatchExecutor": {
+      "mode": "subagent"
+    },
+    "Context Retriever": {
+      "mode": "subagent"
+    },
+    "StageOrchestrator": {
+      "mode": "subagent"
+    },
+    "TaskManager": {
+      "mode": "subagent"
+    },
+    "WorkflowDesigner": {
+      "mode": "subagent"
+    },
+    "ContextOrganizer": {
+      "mode": "subagent"
+    },
+    "DomainAnalyzer": {
+      "mode": "subagent"
+    },
+    "CommandCreator": {
+      "mode": "subagent"
+    },
+    "AgentGenerator": {
+      "mode": "subagent"
+    },
+    "Image Specialist": {
+      "mode": "subagent",
+      "permission": {
+        "image-compression*": "allow",
+        "image_compression*": "allow",
+        "bash": {
+          "*": "ask",
+          "ls *assets/images*": "allow",
+          "mkdir *assets/images*": "allow",
+          "mkdir -p assets/images*": "allow",
+          "date *": "allow",
+          "curl *openrouter.ai/api/v1/chat/completions*": "allow",
+          "python3 *": "allow",
+          "rm -rf /*": "deny",
+          "sudo *": "deny"
+        }
+      }
+    },
+    "Eval Runner": {
+      "mode": "subagent"
+    },
+    "Simple Responder": {
+      "mode": "subagent"
+    }
+  },
+  "provider": {
+    "openrouter": {
+      "name": "OpenRouter",
+      "options": {
+        "apiKey": "{env:OPENCODE_OPENROUTER_API_KEY}"
+      },
+      "models": {
+        "openai/gpt-5-image-mini": {
+          "name": "OpenAI: GPT-5 Image Mini (OpenRouter)",
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf", "audio", "video"],
+            "output": ["text", "image"]
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "image-compression": {
+      "type": "local",
+      "command": ["npx", "-y", "@inhiblab-core/mcp-image-compression"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_COMPRESSION_DOWNLOAD_DIR": "assets/images"
+      }
+    },
+    "filesystem": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
+      "enabled": true,
+      "environment": {
+        "ROOT": "."
+      }
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "enabled": true,
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "gitlab": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITLAB_PERSONAL_ACCESS_TOKEN",
+        "-e",
+        "GITLAB_API_URL",
+        "iwakitakuma/gitlab-mcp"
+      ],
+      "enabled": true,
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{env:GITLAB_TOKEN}",
+        "GITLAB_API_URL": "https://gitlab.infosis.tech/api/v4"
+      }
+    },
+    "sentry": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-sentry"],
+      "enabled": false,
+      "environment": {
+        "SENTRY_AUTH_TOKEN": "{env:SENTRY_AUTH_TOKEN}"
+      }
+    },
+    "jira": {
+      "type": "remote",
+      "url": "{env:JIRA_MCP_URL}",
+      "enabled": true,
+      "oauth": {}
+    }
+  }
+}

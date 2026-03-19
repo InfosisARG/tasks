@@ -4,7 +4,6 @@
     "opencode-gemini-auth@latest",
     "opencode-openai-codex-auth@latest",
     "opencode-antigravity-auth@latest",
-    "opencode-dynamic-context-pruning@latest",
     "opencode-websearch-cited@latest",
     "opencode-type-inject@latest",
     "tokenscope-opencode-plugin@latest",

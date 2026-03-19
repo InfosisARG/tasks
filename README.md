@@ -22,7 +22,7 @@ This repository contains reusable **Taskfile templates** to standardize and simp
 
 ## Requirements
 
-This is a list of var environment requireds:
+This is a list of var environment requires:
 
 - `GITLAB_USER`: This is the GitLab USER.
 - `GITLAB_TOKEN`: This is the GitLab personal access token.
@@ -246,7 +246,7 @@ Using the given version number of `MAJOR.MINOR.PATCH`, we apply the following co
 
 ## Copyright
 
-Copyright © 2018-2025 [Infosis Global](https://infosisglobal.com)
+Copyright © 2018-2026 [Infosis Global](https://infosisglobal.com)
 
 ## Trademarks
 

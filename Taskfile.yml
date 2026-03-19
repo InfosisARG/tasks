@@ -18,6 +18,7 @@ includes:
   terraform: ./src/terraform/Taskfile.yml
   bun: ./src/bun/Taskfile.yml
   opencode: ./src/opencode/Taskfile.yml
+  skills: ./src/skills/Taskfile.yml
   diagrams: ./provision/diagrams/Taskfile.yml
 
 env:
@@ -36,6 +37,10 @@ env:
   README_TEMPLATE: provision/templates/README.tpl.md
   README_INCLUDES: file://
   TERRAFORM_PATH: provision/terraform
+  SKILL_REPOS:
+    https://gitlab.infosisglobal.com/architecture/skills.git
+    https://github.com/sanjay3290/ai-skills
+
 
 dotenv:
   - .env
@@ -98,22 +103,9 @@ tasks:
       - changelog:check
       - git:check
       - docs:check
-      - check:bun
-      - check:curl
-
-  check:bun:
-    desc: Exist bun
-    run: once
-    preconditions:
-      - sh: command -v bun
-        msg: "Please Install bun"
-
-  check:curl:
-    desc: Exist curl
-    run: once
-    preconditions:
-      - sh: command -v curl
-        msg: "Please Install curl"
+      - opencode:check
+      - bun:check
+      - skills:check
 
   readme:
     desc: Generate Readme
@@ -146,6 +138,8 @@ tasks:
       - task: uv:setup
       - task: uv:precommit
       - task: git:setup
+      - task: bun:setup
+      - task: skills:setup
 
   environment:
     desc: Setup environment of project

@@ -162,3 +162,234 @@ No `.cursor/rules/`, `.cursorrules`, or `.github/copilot-instructions.md` presen
 ├── .ci/linters/         # CI linting configs
 └── codemap.md           # Repository codemap
 ```
+
+<skills_system priority="1">
+
+## Available Skills
+
+<!-- SKILLS_TABLE_START -->
+<usage>
+When users ask you to perform tasks, check if any of the available skills below can help complete the task more effectively. Skills provide specialized capabilities and domain knowledge.
+
+How to use skills:
+- Invoke: `npx openskills read <skill-name>` (run in your shell)
+  - For multiple: `npx openskills read skill-one,skill-two`
+- The skill content will load with detailed instructions on how to complete the task
+- Base directory provided in output for resolving bundled resources (references/, scripts/, assets/)
+
+Usage notes:
+- Only use skills listed in <available_skills> below
+- Do not invoke a skill that is already loaded in your context
+- Each skill invocation is stateless
+</usage>
+
+<available_skills>
+
+<skill>
+<name>atlassian</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>azure-devops</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>deep-research</name>
+<description>"Execute autonomous multi-step research using Google Gemini Deep Research Agent. Use for: market analysis, competitive landscaping, literature reviews, technical research, due diligence. Takes 2-10 minutes but produces detailed, cited reports. Costs $2-5 per task."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>elevenlabs</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>git-release</name>
+<description>Create consistent releases and changelogs</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>gitlab-create-mr</name>
+<description>Validate, push the current branch, and create a GitLab merge request from the current diff</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>gmail</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>goji-commit-smart</name>
+<description>Create git commits using goji rules from .goji.json (type/scope/emoji/signoff) with path-based heuristics.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-calendar</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-chat</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-docs</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-drive</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-sheets</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-slides</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>google-tts</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>image-compression</name>
+<description>Reduce image file size using the MCP image-compression tool. If no path is provided, ask the user for the file.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>imagen</name>
+<description>|</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jira-add-worklog</name>
+<description>Skill para registrar worklogs en Jira usando el issue key derivado del branch actual y una descripcion basada en los commits del branch.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jira-cloud-frequent-tasks-csv</name>
+<description>Skill para consultar Jira Cloud mediante MCP y generar un archivo CSV con las tareas más frecuentes de un proyecto dado, sin filtrar por estado.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jira-cloud-incident-manager</name>
+<description>Skill para gestionar incidentes en Jira Cloud usando el MCP de Atlassian (crear, buscar y actualizar issues).</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jira-start-task</name>
+<description>Skill para listar issues no terminadas asignadas al usuario en Jira usando `infobot.toml`, elegir una y crear un branch `feature/<ISSUE-KEY>`.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jira-work-report</name>
+<description>Skill para generar un reporte de implementacion para el issue de Jira derivado del branch actual usando un template y un resumen basado en commits, y publicarlo como comentario.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>jules</name>
+<description>"Delegate coding tasks to Google Jules AI agent for asynchronous execution. Use when user says: 'have Jules fix', 'delegate to Jules', 'send to Jules', 'ask Jules to', 'check Jules sessions', 'pull Jules results', 'jules add tests', 'jules add docs', 'jules review pr'. Handles: bug fixes, documentation, features, tests, refactoring, code reviews. Works with GitHub repos, creates PRs."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>manus</name>
+<description>Delegate complex, long-running tasks to Manus AI agent for autonomous execution. Use when user says 'use manus', 'delegate to manus', 'send to manus', 'have manus do', 'ask manus', 'check manus sessions', or when tasks require deep web research, market analysis, product comparisons, stock analysis, competitive research, document generation, data analysis, or multi-step workflows that benefit from autonomous agent execution with parallel processing.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>markdown-to-jira</name>
+<description>Skill para crear issues de tipo epic y/o task en Jira Cloud a partir de un archivo Markdown y luego completar componentes, labels y issue keys.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>mssql</name>
+<description>"Execute read-only SQL queries against multiple Microsoft SQL Server databases. Use when: (1) querying MSSQL/SQL Server databases, (2) exploring database schemas/tables, (3) running SELECT queries for data analysis, (4) checking database contents. Supports multiple database connections with descriptions for intelligent auto-selection. Blocks all write operations (INSERT, UPDATE, DELETE, DROP, etc.) for safety."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>mysql</name>
+<description>"Execute read-only SQL queries against multiple MySQL databases. Use when: (1) querying MySQL databases, (2) exploring database schemas/tables, (3) running SELECT queries for data analysis, (4) checking database contents. Supports multiple database connections with descriptions for intelligent auto-selection. Blocks all write operations (INSERT, UPDATE, DELETE, DROP, etc.) for safety."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>notebooklm</name>
+<description>"Query and manage Google NotebookLM notebooks with persistent profile auth, source sync, batch/multi queries, and structured exports. Use when user asks to query NotebookLM, 'ask my notebook', shares NotebookLM notebook URLs, wants to list/create notebooks, manage sources, do bulk folder sync, dedupe, or audit exports."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>opencode-tasks-scaffold</name>
+<description>Genera prompts de task templates a partir del template base</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>outline</name>
+<description>"Search, read, and manage Outline wiki documents. Use when: (1) searching wiki for documentation, (2) reading wiki pages or articles, (3) listing wiki collections or documents, (4) creating or updating wiki content, (5) exporting documents as markdown. Works with any Outline wiki instance (self-hosted or cloud)."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>postgres</name>
+<description>"Execute read-only SQL queries against multiple PostgreSQL databases. Use when: (1) querying PostgreSQL databases, (2) exploring database schemas/tables, (3) running SELECT queries for data analysis, (4) checking database contents. Supports multiple database connections with descriptions for intelligent auto-selection. Blocks all write operations (INSERT, UPDATE, DELETE, DROP, etc.) for safety."</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>release</name>
+<description>Run a release bump (major/minor/patch) and generate next changelog from the updated pyproject.toml version.</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>update-pr</name>
+<description>Push branch commits and update the existing MR body safely (prefer REST API)</description>
+<location>project</location>
+</skill>
+
+<skill>
+<name>validate-pr</name>
+<description>Find vulnerabilities or errors in a merge request (checks, scans, merge blockers) and propose fixes.</description>
+<location>project</location>
+</skill>
+
+</available_skills>
+<!-- SKILLS_TABLE_END -->
+
+</skills_system>

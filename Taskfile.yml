@@ -10,6 +10,7 @@ includes:
   docs: ./src/docs/Taskfile.yml
   docker: ./src/docker/Taskfile.yml
   version: ./src/version/Taskfile.yml
+  release: ./src/release/Taskfile.yml
   plantuml: ./src/plantuml/Taskfile.yml
   prettier: ./src/prettier/Taskfile.yml
   sonar: ./src/sonar/Taskfile.yml
@@ -127,13 +128,26 @@ tasks:
       - task: uv:precommit
       - task: git:setup
 
+  environment:
+    desc: Setup environment of project
+    cmds:
+      - task: uv:environment
+
+  validate:
+    desc: "Run validate on all files"
+    cmds:
+      - uv run pre-commit run --all-files
+
   test:
     run: once
     desc: Execute task test all
     cmds:
       - task: go:test
 
-  environment:
-    desc: Setup environment of project
+  help:
     cmds:
-      - task: uv:environment
+      - cmd: |
+          echo 'Use "task --list" to get a list of all available tasks with a short description of what they do.'
+          echo 'There are some more tasks used as dependencies for other tasks.'
+          echo 'You can view them with "task --list-all".'
+        silent: true

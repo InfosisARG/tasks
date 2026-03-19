@@ -4,133 +4,161 @@ This repo is a collection of reusable `Taskfile.yml` templates. The main entrypo
 
 ## Key Tools
 
-- Task runner: `task`
-- Python tooling: `uv` (config in `pyproject.toml`)
-- Formatting: `prettier` (via `task prettier`)
-- Lint gates: `pre-commit` (CI runs `pre-commit run --all-files`)
+| Tool         | Purpose                     | Version Config            |
+| ------------ | --------------------------- | ------------------------- |
+| `task`       | Task runner (go-task v3)    | N/A                       |
+| `uv`         | Python package manager      | N/A                       |
+| `ruff`       | Python linting + formatting | `pyproject.toml`          |
+| `mypy`       | Python type checking        | `pyproject.toml` (strict) |
+| `pre-commit` | Git hooks                   | `.pre-commit-config.yaml` |
+| `prettier`   | Multi-language formatting   | N/A                       |
+| `terraform`  | IaC tooling                 | `TERRAFORM_VERSION` var   |
 
-Generated files:
-
-- `README.md` is generated from `provision/generators/README.yaml` + `provision/templates/README.tpl.md` (run `task readme`). Do not hand-edit `README.md`.
-
-Cursor/Copilot rules:
-
-- No `.cursor/rules/`, `.cursorrules`, or `.github/copilot-instructions.md` present.
+**IMPORTANT**: `README.md` is GENERATED from `provision/generators/README.yaml` + `provision/templates/README.tpl.md`. Run `task readme` after modifying YAML sources. **Do not hand-edit README.md**.
 
 ## Build / Lint / Test Commands
 
-List available tasks:
+### Quick Start
 
 ```bash
-task -l
+task setup      # Create .env, install deps, setup hooks
+task check      # Verify toolchain dependencies
+task prettier   # Format all files (Prettier + Terraform fmt)
+task validate   # Run pre-commit hooks (matches CI)
 ```
 
-Local setup (creates `.env` from `.env.example`, installs deps, installs hooks):
+### Python (via uv)
 
 ```bash
-task setup
+task uv:setup       # Install Python dependencies
+task uv:fmt         # Format with ruff (line length 90)
+task uv:lint        # Lint with ruff + mypy type check
+task uv:test        # Run pytest with coverage
 ```
 
-Preflight checks (toolchain present):
+### Run A Single Test
 
 ```bash
-task check
+# Python/pytest
+uv run pytest -q tests/test_file.py
+uv run pytest -q tests/test_file.py::test_name
+uv run pytest -q -k "pattern_match"
+
+# Go
+go test -v ./path/to/pkg
+go test -v ./path/to/pkg -run '^TestName$'
 ```
 
-Format (Prettier + Terraform fmt):
+### Documentation
 
 ```bash
-task prettier
+task docs:build      # Build MkDocs site
+task docs:serve      # Serve locally for preview
+task readme          # Regenerate README.md from templates
 ```
 
-Python lint/format/typecheck (via `src/uv/Taskfile.yml`):
-
-```bash
-task uv:setup
-task uv:fmt
-task uv:lint
-```
-
-Run all pre-commit hooks (matches CI):
+### Pre-commit (Full CI Pipeline)
 
 ```bash
 uv run pre-commit run --all-files --show-diff-on-failure
 ```
 
-Docs build/serve:
-
-```bash
-task docs:build
-task docs:serve
-```
-
-Tests:
-
-```bash
-task test
-```
-
-### Run A Single Test
-
-Python (pytest examples):
-
-```bash
-uv run pytest -q tests/test_file.py
-uv run pytest -q tests/test_file.py::test_name
-uv run pytest -q -k "expr"
-```
-
-Go (go test examples):
-
-```bash
-go test -v ./path/to/pkg
-go test -v ./path/to/pkg -run '^TestName$'
-```
-
 ## Code Style Guidelines
 
-### Formatting & whitespace
+### Indentation (from .editorconfig)
 
-Follow `.editorconfig`:
+| Extension                             | Indent   | Notes                 |
+| ------------------------------------- | -------- | --------------------- |
+| `*.py`                                | 4 spaces | Python only           |
+| `*.go`                                | tabs     | Go uses tabs          |
+| `*.{yml,yaml,json,toml,md,sh,tf,hcl}` | 2 spaces | Most config files     |
+| `Makefile`                            | tabs     | Makefiles always tabs |
 
-- 2 spaces: `*.{md,yml,yaml,json,toml,js,ts,tsx,sh,tf,hcl}`
-- 4 spaces: `*.py`
-- tabs: `*.go`, `Makefile`
-- `end_of_line=lf`, trim trailing whitespace
+**Global rules**: `end_of_line=lf`, `trim_trailing_whitespace=true`, `charset=utf-8`
 
-### Taskfile conventions (most edits in this repo)
+### Taskfile Conventions
 
-- Use `version: "3"` and keep file name `Taskfile.yml`.
-- Prefer namespaced tasks: `area:verb` (examples: `uv:lint`, `docs:build`).
-- Always set `desc:`; use `deps:` for prerequisites; use `preconditions:` for binaries/required env vars.
-- If a task should support “single file/single test”, accept and forward `{{.CLI_ARGS}}`.
-- Keep tasks non-interactive; ensure commands fail on errors.
+```yaml
+version: "3" # Always use v3
 
-### Python style (configured in `pyproject.toml`)
+tasks:
+  namespace:verb: # Namespaced naming: uv:lint, docs:build
+    desc: "Description" # REQUIRED: always provide desc
+    run: once # Use for idempotent tasks
+    deps: # Dependencies (executed first)
+      - task: check:tool
+    preconditions: # Prerequisites validation
+      - sh: command -v tool
+        msg: "Install tool first"
+    cmds:
+      - command {{.VARS}} # Use template variables
+```
 
-- Format: `ruff format` (line length 90).
-- Lint: `ruff check` (includes import sorting).
-- Types: `mypy` is `strict = true`; avoid untyped public functions.
-- Error handling: raise specific exceptions; avoid `except:` / swallowing errors (ruff enables blind-except checks).
+**Rules**:
 
-### Go style (lint config present)
+- Accept `{{.CLI_ARGS}}` for single-file operations
+- Keep tasks non-interactive (CI-friendly)
+- Commands must fail on errors (no `|| true` unless intentional)
 
-- Format: `gofmt -s`.
-- Imports: `goimports` with local prefix `github.com/infosisarg/` (see `.ci/linters/.golangci.yml`).
-- Lint: `golangci-lint run --config .ci/linters/.golangci.yml`.
+### Python Style (pyproject.toml)
 
-### JS/TS style (for config/scripts)
+**Key ruff rules enabled**:
 
-- Prefer Prettier formatting (see `task prettier`).
-- ESLint rules live in `.ci/linters/.eslintrc.js`.
+- `I` - Import sorting
+- `BLE` - No bare except (catches `except:`)
+- `S` - Security (bandit)
+- `B` - Bugbear best practices
+- `N` - PEP8 naming conventions
+- `PLE`, `PLR` - Pylint rules
 
-### Documentation
+**Type annotations**: `mypy strict = true` - no untyped public functions
 
-- Keep docs command examples aligned with actual tasks.
-- If updating the README content, change its sources and run `task readme`.
+**Error handling**: Raise specific exceptions; never swallow errors.
+
+### Go Style
+
+```bash
+gofmt -s              # Format
+goimports             # Format + organize imports
+golangci-lint run     # Full linting
+```
+
+**Import conventions**: Local prefix `github.com/infosisarg/`
 
 ## Git / PR Requirements
 
-- Commits: Conventional Commits are expected (commit-msg hook uses commitlint).
-- PR titles: semantic types enforced via `.github/semantic.yml`: `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|release|hotfix: ...`
-- Secret scanning: pre-commit runs `detect-private-key` and `gitleaks`; never commit credentials.
+### Commits
+
+- **Format**: Conventional Commits (enforced by commitlint)
+- **Types**: `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|release|hotfix`
+- **Format**: `<type>(<scope>): <description>` or `<type>: <description>`
+
+### PR Titles
+
+Enforced via `.github/semantic.yml`:
+
+```
+feat: add new template
+fix(docker): resolve build timeout
+docs: update README generation
+```
+
+### Security
+
+- Pre-commit runs `detect-private-key` and `gitleaks`
+- **Never commit credentials, keys, or secrets**
+- Use `.env.example` for template variables
+
+## Cursor/Copilot Rules
+
+No `.cursor/rules/`, `.cursorrules`, or `.github/copilot-instructions.md` present.
+
+## Repository Structure
+
+```
+├── Taskfile.yml         # Main entry point
+├── src/                 # 40+ Taskfile templates by tool
+├── provision/           # README generation pipeline
+├── .ci/linters/         # CI linting configs
+└── codemap.md           # Repository codemap
+```

@@ -16,17 +16,10 @@ Ver convenciones en: `@.opencode/context/project/task-templates.md`
 
 ## Placeholders
 
-| Placeholder         | Uso                         |
-| ------------------- | --------------------------- |
-| `{{task_name}}`     | Nombre legible: "Terraform" |
-| `{{task_slug}}`     | Slug: "terraform"           |
-| `{{tool_command}}`  | Comando: "terraform"        |
-| `{{setup_command}}` | Comando de setup            |
-| `{{fmt_command}}`   | Comando de format           |
-| `{{lint_command}}`  | Comando de lint             |
-| `{{test_command}}`  | Comando de test             |
-
----
+| Placeholder     | Uso                         |
+| --------------- | --------------------------- |
+| `{{task_name}}` | Nombre legible: "Terraform" |
+| `{{task_slug}}` | Slug: "terraform"           |
 
 ## Estructura Base
 
@@ -44,14 +37,14 @@ tasks:
     desc: Exist {{task_name}}
     run: once
     preconditions:
-      - sh: command -v {{tool_command}}
+      - sh: command -v <tool_command>
         msg: "Please Install {{task_name}}"
 
   setup:
     desc: Setup {{task_name}} dependences.
     run: once
     cmds:
-      - { { setup_command } }
+      - <setup_command>
     deps:
       - task: check
 
@@ -59,7 +52,7 @@ tasks:
     desc: Format files {{task_name}}.
     run: once
     cmds:
-      - { { fmt_command } }
+      - <fmt_command>
     deps:
       - task: check
 
@@ -67,7 +60,7 @@ tasks:
     desc: Run linter {{task_name}}.
     run: once
     cmds:
-      - { { lint_command } }
+      - <lint_command>
     deps:
       - task: check
 
@@ -75,12 +68,10 @@ tasks:
     desc: Run tests {{task_name}}.
     run: once
     cmds:
-      - { { test_command } }
+      - <test_command>
     deps:
       - task: check
 ```
-
----
 
 ## Salida
 
@@ -91,6 +82,6 @@ tasks:
 ## Validacion
 
 ```bash
-task prettier
+task {{task_slug}}
 task -l src/{{task_slug}}/Taskfile.yml
 ```

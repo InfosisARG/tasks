@@ -17,6 +17,7 @@ includes:
   sonar: ./src/sonar/Taskfile.yml
   terraform: ./src/terraform/Taskfile.yml
   bun: ./src/bun/Taskfile.yml
+  opencode: ./src/opencode/Taskfile.yml
   diagrams: ./provision/diagrams/Taskfile.yml
 
 env:

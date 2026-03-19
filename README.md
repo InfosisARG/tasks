@@ -237,7 +237,6 @@ tasks:
 
 
 
-
 ## Examples
 
 <!-- Space: Projects -->
@@ -254,7 +253,6 @@ tasks:
 ```bash
 task setup
 ```
-
 
 
 

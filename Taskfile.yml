@@ -32,15 +32,13 @@ env:
     sh: node --version 2> /dev/null || echo "not exist"
   APP_TAG:
     sh: git describe --tags $(git rev-list --tags --max-count=1) 2> /dev/null || echo "0.0.0"
-  PYTHON_PACKAGE_MANAGER: uv
   README_YAML: provision/generators/README.yaml
   README_TEMPLATE: provision/templates/README.tpl.md
   README_INCLUDES: file://
+  PYTHON_PACKAGE_MANAGER: uv
   TERRAFORM_PATH: provision/terraform
   SKILL_REPOS:
     https://gitlab.infosisglobal.com/architecture/skills.git
-    https://github.com/sanjay3290/ai-skills
-
 
 dotenv:
   - .env
@@ -61,6 +59,7 @@ vars:
     community.sops
   GIT_IGNORES_CUSTOM: |
     bin
+    .project
     .scannerwork
     .secrets
     public
@@ -122,6 +121,7 @@ tasks:
     desc: Execute format files
     cmds:
       - task: biome:fmt
+      - task: uv:fmt
       - task: terraform:fmt
 
   upgrade:

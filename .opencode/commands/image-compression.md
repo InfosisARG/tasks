@@ -1,6 +1,5 @@
 ---
 description: Compress an image using the MCP image-compression server (asks for file path if missing)
-agent: Image Specialist
 ---
 
 1. Read the image path from `$1`.

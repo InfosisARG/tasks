@@ -1,6 +1,5 @@
 ---
 description: Crea issues epic y/o task en Jira desde un archivo Markdown estructurado
-agent: OpenRepoManager
 ---
 
 1. Load skill: markdown-to-jira

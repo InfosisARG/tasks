@@ -1,6 +1,5 @@
 ---
 description: Push branch and create MR with title and description
-agent: OpenRepoManager
 ---
 
 1. Load skill: gitlab-create-mr

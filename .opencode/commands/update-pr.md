@@ -1,6 +1,5 @@
 ---
 description: Push branch commits and update MR content
-agent: OpenRepoManager
 ---
 
 1. Run `task validate`

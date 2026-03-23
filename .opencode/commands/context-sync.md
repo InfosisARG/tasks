@@ -1,6 +1,5 @@
 ---
 description: Audit and sync project-specific OpenCode files and AGENTS.md with the current repository
-agent: OpenRepoManager
 ---
 
 1. Load skill: context-sync

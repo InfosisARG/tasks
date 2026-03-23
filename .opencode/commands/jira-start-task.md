@@ -1,6 +1,5 @@
 ---
 description: Lista las tareas pendientes en Jira y crea un feature branch para la seleccionada
-agent: OpenRepoManager
 ---
 
 1. Load skill: jira-start-task

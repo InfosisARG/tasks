@@ -1,6 +1,5 @@
 ---
 description: Validate an MR for errors/vulnerabilities (asks for MR; lists assigned MRs)
-agent: OpenRepoManager
 ---
 
 1. Load skill: validate-pr

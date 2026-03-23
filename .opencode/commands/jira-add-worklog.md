@@ -1,6 +1,5 @@
 ---
 description: Registra un worklog en Jira usando el issue del branch actual y una descripcion basada en commits
-agent: OpenRepoManager
 ---
 
 1. Load skill: jira-add-worklog

@@ -12,6 +12,7 @@ exclude: >
     .+\.node_modules\/.*$|
     .+\.external_modules.*$|
     .+\.terraform.*$|
+    pnpm-lock.yaml|
     .+\.venv.*$|
     .+\.lock$|
     .+\.mdx$|

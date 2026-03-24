@@ -113,5 +113,6 @@ modules:
   - docs/tasks/plantuml.md
   - docs/tasks/sonar.md
 
+  - docs/tasks/glab.md
 examples:
   - "docs/examples/common.md"

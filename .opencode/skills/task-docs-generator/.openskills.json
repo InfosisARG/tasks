@@ -1,0 +1,4 @@
+{
+  "name": "task-docs-generator",
+  "description": "Generate documentation for a task from its Taskfile"
+}

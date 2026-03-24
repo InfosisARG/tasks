@@ -13,11 +13,13 @@ includes:
   release: ./src/release/Taskfile.yml
   plantuml: ./src/plantuml/Taskfile.yml
   prettier: ./src/prettier/Taskfile.yml
+  pre-commit: ./src/pre-commit/Taskfile.yml
   biome: ./src/biomejs/Taskfile.yml
   sonar: ./src/sonar/Taskfile.yml
   terraform: ./src/terraform/Taskfile.yml
   bun: ./src/bun/Taskfile.yml
   opencode: ./src/opencode/Taskfile.yml
+  go: ./src/go/Taskfile.yml
   skills: ./src/skills/Taskfile.yml
   diagrams: ./provision/diagrams/Taskfile.yml
 
@@ -128,7 +130,7 @@ tasks:
     desc: Execute upgrade packages
     cmds:
       - uv update
-      - uv run pre-commit autoupdate
+      - task: pre-commit:update
 
   setup:
     desc: Setup dependences of project
@@ -136,9 +138,7 @@ tasks:
       - >-
         [ -e ".env" ] || cp -rf .env.example .env
       - task: uv:setup
-      - task: uv:precommit
       - task: git:setup
-      - task: bun:setup
       - task: skills:setup
 
   environment:
@@ -146,11 +146,12 @@ tasks:
     cmds:
       - task: uv:environment
       - task: bun:setup
+      - task: pre-commit:setup
 
   validate:
     desc: "Run validate on all files"
     cmds:
-      - uv run pre-commit run --all-files
+      - task: pre-commit:lint
 
   test:
     run: once
